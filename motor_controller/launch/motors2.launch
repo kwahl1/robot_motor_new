@@ -1,0 +1,39 @@
+
+<launch>
+
+    <node name="controller" pkg="pid" type="controller" ns="left_motor" output="screen" >
+      <param name="node_name" value="left_motor_pid" />
+      <param name="Kp" value="5.0" />
+      <param name="Ki" value="0.0" />
+      <param name="Kd" value="0.1" />
+      <param name="upper_limit" value="100" />
+      <param name="lower_limit" value="-100" />
+      <param name="windup_limit" value="100" />
+      <param name="max_loop_frequency" value="100.0" />
+      <param name="min_loop_frequency" value="10.0" />
+     </node>
+
+  <node pkg="motor_controller" type="motor_controller_node" name="motor_controller" ns="left_motor" >
+</node>
+
+  <node pkg="phidgets" type="motor" name="left_phidget" args="_serial:=465093 __name:=left_motor _name:=left_motor"/>
+
+    <node name="controller" pkg="pid" type="controller" ns="right_motor" output="screen" >
+      <param name="node_name" value="right_motor_pid" />
+      <param name="Kp" value="-5.0" />
+      <param name="Ki" value="-0.0" />
+      <param name="Kd" value="-0.1" />
+      <param name="upper_limit" value="100" />
+      <param name="lower_limit" value="-100" />
+      <param name="windup_limit" value="100" />
+      <param name="max_loop_frequency" value="100.0" />
+      <param name="min_loop_frequency" value="10.0" />
+     </node>
+
+
+  <node pkg="motor_controller" type="motor_controller_node" name="motor_controller" ns="right_motor" >
+</node>
+
+  <node pkg="phidgets" type="motor" name="right_phidget" args="_serial:=465084 __name:=right_motor _name:=right_motor" />
+
+</launch>
